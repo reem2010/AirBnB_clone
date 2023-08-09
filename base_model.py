@@ -16,7 +16,7 @@ class BaseModel:
         self.id = str(uuid.uuid4())
         self.created_at =
         self.updated_at =
-    
+ 
     def save(self):
 
     def to_dict(self):
@@ -25,6 +25,6 @@ class BaseModel:
         update_dict = self.__dict__
         update_dict['__class__'] = cls.__name__
         return update_dict
-    
+
     def __str__(self):
         return f"[{cls.__name__}] ({self.id}) {self.__dict__}"
