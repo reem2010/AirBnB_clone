@@ -24,6 +24,8 @@ class TestBase(unittest.TestCase):
         self.assertEqual(type(my_model.created_at), datetime.datetime)
         self.assertEqual(type(my_model.updated_at), datetime.datetime)
         my_model_json = my_model.to_dict()
+        self.assertEqual(my_model_json['created_at'], (my_model.created_at).isoformat())
+        self.assertEqual(my_model_json['updated_at'], (my_model.updated_at).isoformat())
 
     def test_tidic(self):
         my_model = BaseModel()
