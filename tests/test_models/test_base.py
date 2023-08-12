@@ -42,7 +42,7 @@ class TestBase(unittest.TestCase):
         my_model = BaseModel()
         model_up = my_model.updated_at
         my_model.save()
-        self.asserLess(model_up, my_model.updated_at)
+        self.assertLess(model_up, my_model.updated_at)
         self.assertLess(my_model.created_at, my_model.updated_at)
         self.assertEqual(type(my_model.created_at), datetime.datetime)
         self.assertEqual(type(my_model.updated_at), datetime.datetime)
