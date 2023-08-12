@@ -2,6 +2,7 @@
 """test module for BaseModel"""
 import unittest
 import datetime
+import uuid
 from models.base_model import BaseModel
 
 
@@ -11,9 +12,18 @@ class TestBase(unittest.TestCase):
     def test_Base(self):
         """test base id"""
         my_model = BaseModel()
+        self.assertEqual(type(my_model), BaseModel)
         self.assertEqual(type(my_model.id), str)
         my_model2 = BaseModel()
         self.assertNotEqual(my_model.id, my_model2.id)
+
+    def test_uuid(self):
+        my_model = BaseModel()
+        try:
+            uuid_4 = uuid.UUID(my_model.id).version
+        except ValueError:
+            uuid_4 = 0
+        self.assertTrue(uuid_4 == 4)
 
     def test_str(self):
         """test function string"""
