@@ -2,12 +2,13 @@
 """Importing CMD"""
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
 def valid_key(command):
     """return valid key to the dictionary"""
-    classs = [BaseModel.__name__]
+    classs = [BaseModel.__name__, User.__name__]
     valid_key = ""
     if len(command) == 0:
         print("** class name missing **")
@@ -42,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """Create a new instance of BaseModel"""
-        classs = [BaseModel]
+        classs = [BaseModel, User]
         if len(line) == 0:
             print("** class name missing **")
             return
@@ -82,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of
         all instances based or not on the class name
         """
-        models = [BaseModel.__name__]
+        models = [BaseModel.__name__, User.__name__]
         out = []
         if len(line) != 0 and line not in models:
             print("** class doesn't exist **")
