@@ -27,6 +27,7 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
+        """return string representation"""
         return f"[BaseModel] ({self.id}) {self.__dict__}"
 
     def save(self):
