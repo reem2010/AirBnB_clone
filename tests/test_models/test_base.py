@@ -55,8 +55,13 @@ class TestBase(unittest.TestCase):
     def test_todic(self):
         """test to dic function"""
         my_model = BaseModel()
+        my_model.name = "MODEL"
+        my_model.num = 19
         my_model_json = my_model.to_dict()
-        self.assertTrue('__class__' in my_model_json)
+        self.assertIn('__class__', my_model_json)
+        for key in my_model.__dict__:
+            self.assertIn(key, my_model_json)
+        self.assertEqual(type(my_model_json), dict)
 
 
 if __name__ == '__main__':
