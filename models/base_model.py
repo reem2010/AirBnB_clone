@@ -6,13 +6,11 @@ import models
 
 
 class BaseModel:
-    """
-     class BaseModel that defines all
-     common attributes/methods for other classes
-    """
+    """class BaseModel"""
 
     def __init__(self, *args, **kwargs):
         """Initiation of new instance"""
+
         if (kwargs is not None) and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == '__class__':
@@ -28,15 +26,18 @@ class BaseModel:
 
     def __str__(self):
         """return string representation"""
+
         return f"[BaseModel] ({self.id}) {self.__dict__}"
 
     def save(self):
         """update the time"""
+
         self.updated_at = datetime.datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """Create dictionary of object"""
+
         update_dict = (self.__dict__).copy()
         update_dict['__class__'] = self.__class__.__name__
         update_dict['created_at'] = self.created_at.isoformat()
