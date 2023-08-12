@@ -31,11 +31,19 @@ class TestBase(unittest.TestCase):
         out = f"[BaseModel] ({my_model.id}) {my_model.__dict__}"
         self.assertEqual(my_model.__str__(), out)
 
+    def test_creation_date(self):
+        my_model_1 = BaseModel()
+        my_model_2 = BaseModel()
+        self.assertLess(my_model_1.created_at, my_model_2.created_at)
+        self.assertLess(my_model_1.updated_at, my_model_2.updated_at)
+
     def test_time(self):
         """test the time"""
         my_model = BaseModel()
+        model_up = my_model.updated_at
         my_model.save()
-        self.assertNotEqual(my_model.created_at, my_model.updated_at)
+        self.asserLess(model_up, my_model.updated_at)
+        self.assertLess(my_model.created_at, my_model.updated_at)
         self.assertEqual(type(my_model.created_at), datetime.datetime)
         self.assertEqual(type(my_model.updated_at), datetime.datetime)
         my_model_json = my_model.to_dict()
