@@ -3,6 +3,7 @@
 import json
 import os
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -33,8 +34,9 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+        fun = {'BaseModel':BaseModel, 'User': User}
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r') as file:
                 readFile = json.loads(file.read())
-                for value in readFile.values():
-                    self.new(BaseModel(**value))
+                for key, value in readFile.items():
+                    self.new(fun[key.split('.')[0]](**value))
