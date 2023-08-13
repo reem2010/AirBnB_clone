@@ -20,7 +20,7 @@ $ ./console.py
 
 ## How to use it
 
-The console works both in interactive mode and non-interactive mode. To start the console in interactive mode, run the following coomand:
+The console works both in interactive mode and non-interactive mode. To start the console in interactive mode, run the following command:
 
 ```bash
 $ ./console.py
