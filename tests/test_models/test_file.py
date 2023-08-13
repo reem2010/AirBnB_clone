@@ -42,7 +42,7 @@ class TestFile(unittest.TestCase):
         self.assertEqual(type(Place().latitude), float)
         self.assertEqual(type(Place().longitude), float)
         self.assertEqual(type(Place().amenity_ids), list)
-        self.assertEqual(type(Place().id), list)
+        self.assertEqual(type(Place().id), str)
         self.assertEqual(type(Place().created_at), datetime)
         self.assertEqual(type(Place().updated_at), datetime)
         self.assertEqual(type(Review().place_id), str)
@@ -50,7 +50,7 @@ class TestFile(unittest.TestCase):
         self.assertEqual(type(Review().text), str)
         self.assertEqual(type(Review().id), str)
         self.assertEqual(type(Review().created_at), datetime)
-        self.assertEqual(type(Review().updated_at), str)
+        self.assertEqual(type(Review().updated_at), datetime)
 
     def test_class_type(self):
         self.assertEqual(type(State()), State)
@@ -58,5 +58,3 @@ class TestFile(unittest.TestCase):
         self.assertEqual(type(Amenity()), Amenity)
         self.assertEqual(type(Place()), Place)
         self.assertEqual(type(Review()), Review)
-
-    def 
