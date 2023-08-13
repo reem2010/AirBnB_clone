@@ -2,7 +2,12 @@
 """test module for BaseModel"""
 import unittest
 import datetime
+<<<<<<< HEAD
+import time
+from models import storage
+=======
 import uuid
+>>>>>>> master
 from models.base_model import BaseModel
 
 
@@ -12,7 +17,34 @@ class TestBase(unittest.TestCase):
     def test_Base(self):
         """test base id"""
         my_model = BaseModel()
+<<<<<<< HEAD
+        self.assertTrue(isinstance(my_model, BaseModel))
+        self.assertIn(my_model, storage.all().values())
+        key = f"{my_model.__class__.__name__}.{my_model.id}"
+        self.assertIn(key, storage.all().keys())
+        my_model2 = BaseModel()
+        self.assertIn(my_model, storage.all().values())
+
+    def test_arguments(self):
+        """test arguments"""
+        my_model = BaseModel()
+        my_model.my_number = 89
+        self.assertEqual(my_model.my_number, 89)
+        out = my_model.to_dict().copy()
+        self.assertIn('my_number', out.keys())
+        model = BaseModel(**out)
+        self.assertFalse(my_model is model)
+        self.assertEqual(my_model.id, model.id)
+        self.assertEqual(my_model.created_at, model.created_at)
+        self.assertEqual(my_model.updated_at, model.updated_at)
+        model.save()
+
+    def test_id(self):
+        """test id"""
+        my_model = BaseModel()
+=======
         self.assertEqual(type(my_model), BaseModel)
+>>>>>>> master
         self.assertEqual(type(my_model.id), str)
         my_model2 = BaseModel()
         self.assertNotEqual(my_model.id, my_model2.id)
