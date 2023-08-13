@@ -90,7 +90,3 @@ class TestBase(unittest.TestCase):
         for key in my_model.__dict__:
             self.assertIn(key, my_model_json)
         self.assertEqual(type(my_model_json), dict)
-
-
-if __name__ == '__main__':
-    unittest.main()
