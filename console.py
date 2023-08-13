@@ -13,8 +13,6 @@ from models import storage
 
 
 def valid_key(command):
-    """return valid key to the dictionary"""
-
     classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
     classs.append('Review')
     new_key = ""
