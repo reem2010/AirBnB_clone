@@ -112,12 +112,30 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in classes:
                 print("** class doesn't exist **")
             elif args[1] == "all()":
-                dict1 = storage.all()
-                out = []
-                for key in dict1.keys():
-                    if key.split('.')[0] == args[0]:
-                        out.append((dict1[key]).__str__())
-                print(f"[{', '.join(out)}]")
+                self.class_all(args[0])
+            elif args[1] == "count()":
+                self.count(args[0])
+        else:
+            print('*** Unknown syntax:', line)
+
+    def class_all(self, args):
+        """
+        """
+        dict1 = storage.all()
+        out = []
+        for key in dict1.keys():
+            if key.split('.')[0] == args:
+                out.append((dict1[key]).__str__())
+        print(f"[{', '.join(out)}]")
+
+    def count(self, args):
+        """retrieve the number of instances of a class"""
+        count = 0
+        dict1 = storage.all().copy()
+        for key in dict1.keys():
+            if key.split('.')[0] == args:
+                count+=1
+        print(count)
 
     def do_update(self, line):
         """Updates an instance based on the class name and id"""
