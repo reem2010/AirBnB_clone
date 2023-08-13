@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Importing CMD"""
 import cmd
+import re
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -115,6 +116,15 @@ class HBNBCommand(cmd.Cmd):
                 self.class_all(args[0])
             elif args[1] == "count()":
                 self.count(args[0])
+            elif re.match(r"show", args[1]):
+                pattern = str((re.search(r'"([^"]*)"', args[1])).group())
+                pattern = pattern.replace("\"", "")
+                self.do_show(f"{args[0]} {pattern}")
+            elif re.match(r"destroy", args[1]):
+                pattern = str((re.search(r'"([^"]*)"', args[1])).group())
+                pattern = pattern.replace("\"", "")
+                self.do_destroy(f"{args[0]} {pattern}")
+
         else:
             print('*** Unknown syntax:', line)
 
