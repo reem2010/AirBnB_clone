@@ -17,25 +17,6 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-    def valid_key(self, command):
-    classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
-    classs.append('Review')
-    new_key = ""
-    if len(command) == 0:
-        print("** class name missing **")
-    elif command[0] not in classs:
-        print("** class doesn't exist **")
-    elif len(command) == 1:
-        print("** instance id missing **")
-    else:
-        key = f"{command[0]}.{command[1]}"
-        dict1 = storage.all().copy()
-        if key not in dict1:
-            print("** no instance found **")
-        else:
-            new_key = key
-    return(new_key)
-
     def do_EOF(self, line):
         """To exit the program"""
 
@@ -70,24 +51,46 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         """Prints the string representation of an instance"""
 
+        classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
+        classs.append('Review')
         command = line.split()
-        key = self.valid_key(command)
-        if len(key) != 0:
-            dict1 = storage.all()
-            obj = dict1[key]
-            print(obj)
+        if len(command) == 0:
+            print("** class name missing **")
+        elif command[0] not in classs:
+            print("** class doesn't exist **")
+        elif len(command) == 1:
+            print("** instance id missing **")
+        else:
+            key = f"{command[0]}.{command[1]}"
+            dict1 = storage.all().copy()
+            if key not in dict1:
+                print("** no instance found **")
+            else:
+                obj = dict1[key]
+                print(obj)
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
 
+        classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
+        classs.append('Review')
         command = line.split()
-        key = self.valid_key(command)
-        if len(key) != 0:
-            dict1 = storage.all()
-            obj = dict1[key]
-            del obj
-            del dict1[key]
-            storage.save()
+        if len(command) == 0:
+            print("** class name missing **")
+        elif command[0] not in classs:
+            print("** class doesn't exist **")
+        elif len(command) == 1:
+            print("** instance id missing **")
+        else:
+            key = f"{command[0]}.{command[1]}"
+            dict1 = storage.all().copy()
+            if key not in dict1:
+                print("** no instance found **")
+            else:
+                obj = dict1[key]
+                del obj
+                del dict1[key]
+                storage.save()
 
     def do_all(self, line):
         """representation of all instances based or not on the class name"""
@@ -158,8 +161,22 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, line):
         """Updates an instance based on the class name and id"""
 
+        classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
+        classs.append('Review')
         command = line.split()
-        key = self.valid_key(command)
+        if len(command) == 0:
+            print("** class name missing **")
+        elif command[0] not in classs:
+            print("** class doesn't exist **")
+        elif len(command) == 1:
+            print("** instance id missing **")
+        else:
+            key = f"{command[0]}.{command[1]}"
+            dict1 = storage.all().copy()
+            if key not in dict1:
+                print("** no instance found **")
+            else:
+                key = ""
         if len(key) == 0:
             return
         if len(command) == 2:
