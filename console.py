@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
         all instances based or not on the class name
         """
         models = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
-        classs.append('Review')
+        models.append('Review')
         out = []
         if len(line) != 0 and line not in models:
             print("** class doesn't exist **")
