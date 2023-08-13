@@ -14,6 +14,7 @@ from models import storage
 
 def valid_key(command):
     """return valid key to the dictionary"""
+
     classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
     classs.append('Review')
     valid_key = ""
@@ -40,18 +41,22 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, line):
         """To exit the program"""
+
         return True
 
     def do_quit(self, line):
         """To quit the program"""
+
         return True
 
     def emptyline(self):
         """Enter and I will do nothing!"""
+
         return
 
     def do_create(self, line):
         """Create a new instance of BaseModel"""
+
         classs = [BaseModel, User, State, City, Amenity, Place]
         classs.append(Review)
         if len(line) == 0:
@@ -67,6 +72,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """Prints the string representation of an instance"""
+
         command = line.split()
         key = valid_key(command)
         if len(key) != 0:
@@ -76,6 +82,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id"""
+
         command = line.split()
         key = valid_key(command)
         if len(key) != 0:
@@ -87,6 +94,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """representation of all instances based or not on the class name"""
+
         models = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
         models.append('Review')
         out = []
@@ -101,6 +109,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """for unique syntax"""
+
         classes = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
         classes.append('Review')
         args = line.split('.')
@@ -141,6 +150,7 @@ class HBNBCommand(cmd.Cmd):
 
     def count(self, args):
         """retrieve the number of instances of a class"""
+
         count = 0
         dict1 = storage.all().copy()
         for key in dict1.keys():
@@ -150,6 +160,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Updates an instance based on the class name and id"""
+
         command = line.split()
         key = valid_key(command)
         if len(key) == 0:
