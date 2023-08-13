@@ -12,6 +12,28 @@ from models.review import Review
 from models import storage
 
 
+def valid_key(command):
+    """return valid key to the dictionary"""
+
+    classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
+    classs.append('Review')
+    new_key = ""
+    if len(command) == 0:
+        print("** class name missing **")
+    elif command[0] not in classs:
+        print("** class doesn't exist **")
+    elif len(command) == 1:
+        print("** instance id missing **")
+    else:
+        key = f"{command[0]}.{command[1]}"
+        dict1 = storage.all().copy()
+        if key not in dict1:
+            print("** no instance found **")
+        else:
+            new_key = key
+    return(new_key)
+
+
 class HBNBCommand(cmd.Cmd):
     """Inheritance of cmd class"""
 
@@ -52,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints the string representation of an instance"""
 
         command = line.split()
-        key = self.valid_key(command)
+        key = valid_key(command)
         if len(key) != 0:
             dict1 = storage.all()
             obj = dict1[key]
@@ -62,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
         """Deletes an instance based on the class name and id"""
 
         command = line.split()
-        key = self.valid_key(command)
+        key = valid_key(command)
         if len(key) != 0:
             dict1 = storage.all()
             obj = dict1[key]
@@ -140,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id"""
 
         command = line.split()
-        key = self.valid_key(command)
+        key = valid_key(command)
         if len(key) == 0:
             return
         if len(command) == 2:
@@ -159,27 +181,6 @@ class HBNBCommand(cmd.Cmd):
             setattr(obj, command[2], command[3])
             dict1[key] = obj
             storage.save()
-    
-    def valid_key(self, command):
-        """return valid key to the dictionary"""
-
-        classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
-        classs.append('Review')
-        valid_key = ""
-        if len(command) == 0:
-            print(" class name missing ")
-        elif command[0] not in classs:
-            print(" class doesn't exist ")
-        elif len(command) == 1:
-            print(" instance id missing ")
-        else:
-            key = f"{command[0]}.{command[1]}"
-            dict1 = storage.all().copy()
-            if key not in dict1:
-                print(" no instance found ")
-            else:
-                valid_key = key
-        return(valid_key)
 
 
 if __name__ == '__main__':
