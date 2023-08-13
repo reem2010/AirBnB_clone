@@ -23,13 +23,9 @@ $ ./console.py
 The console works both in interactive mode and non-interactive mode. To start the console in interactive mode, run the following coomand:
 
 ```bash
->>> ./console.py
+$ ./console.py
 ```
-to create a new instance:
-example
-```bash
-$ create BaseModel
-```
-to delete an instance write `destroy <class name> <class id>`
-to show the string representation of an instance `show <class name> <class id>`
-to update an instance `update <class name> <id> <attribute name> <attribute value>`
+- to create a new instance: `create <class name>`
+- to delete an instance write `destroy <class name> <class id>`
+- to show the string representation of an instance `show <class name> <class id>`
+- to update an instance `update <class name> <id> <attribute name> <attribute value>`
