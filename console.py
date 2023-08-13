@@ -12,28 +12,6 @@ from models.review import Review
 from models import storage
 
 
-def valid_key(command):
-    """return valid key to the dictionary"""
-
-    classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
-    classs.append('Review')
-    valid_key = ""
-    if len(command) == 0:
-        print("** class name missing **")
-    elif command[0] not in classs:
-        print("** class doesn't exist **")
-    elif len(command) == 1:
-        print("** instance id missing **")
-    else:
-        key = f"{command[0]}.{command[1]}"
-        dict1 = storage.all().copy()
-        if key not in dict1:
-            print("** no instance found **")
-        else:
-            valid_key = key
-    return(valid_key)
-
-
 class HBNBCommand(cmd.Cmd):
     """Inheritance of cmd class"""
 
