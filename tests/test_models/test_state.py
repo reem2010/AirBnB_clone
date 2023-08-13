@@ -10,10 +10,12 @@ class TestFile(unittest.TestCase):
     """class to test base model"""
 
     def test_attributes_type(self):
+        """test attributes type"""
         self.assertEqual(type(State().name), str)
         self.assertEqual(type(State().id), str)
         self.assertEqual(type(State().updated_at), datetime)
         self.assertEqual(type(State().created_at), datetime)
 
     def test_class_type(self):
+        """test class type"""
         self.assertEqual(type(State()), State)

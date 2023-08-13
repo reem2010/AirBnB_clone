@@ -44,6 +44,7 @@ class TestBase(unittest.TestCase):
         self.assertNotEqual(my_model.id, my_model2.id)
 
     def test_uuid(self):
+        """test uuid type"""
         my_model = BaseModel()
         try:
             uuid_4 = uuid.UUID(my_model.id).version
@@ -58,6 +59,7 @@ class TestBase(unittest.TestCase):
         self.assertEqual(my_model.__str__(), out)
 
     def test_creation_date(self):
+        """test creation data"""
         my_model_1 = BaseModel()
         my_model_2 = BaseModel()
         self.assertLess(my_model_1.created_at, my_model_2.created_at)
