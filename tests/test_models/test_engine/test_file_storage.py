@@ -37,3 +37,7 @@ class TestFile(unittest.TestCase):
         for i in my_model:
             key = f"{i.__class__.__name__}.{i.id}"
             self.assertIn(key, storage.all().keys())
+
+
+if __name__ == '__main__':
+    unittest.main()
