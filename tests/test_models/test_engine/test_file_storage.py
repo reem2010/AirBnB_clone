@@ -25,3 +25,7 @@ class TestFile(unittest.TestCase):
         self.assertIn(key, storage.all().keys())
         my_model2 = BaseModel()
         self.assertIn(my_model, storage.all().values())
+
+
+if __name__ == '__main__':
+    unittest.main()
