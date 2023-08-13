@@ -12,7 +12,12 @@ from models.review import Review
 from models import storage
 
 
-def valid_key(command):
+class HBNBCommand(cmd.Cmd):
+    """Inheritance of cmd class"""
+
+    prompt = '(hbnb) '
+
+    def valid_key(self, command):
     classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
     classs.append('Review')
     new_key = ""
@@ -30,12 +35,6 @@ def valid_key(command):
         else:
             new_key = key
     return(new_key)
-
-
-class HBNBCommand(cmd.Cmd):
-    """Inheritance of cmd class"""
-
-    prompt = '(hbnb) '
 
     def do_EOF(self, line):
         """To exit the program"""
@@ -72,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints the string representation of an instance"""
 
         command = line.split()
-        key = valid_key(command)
+        key = self.valid_key(command)
         if len(key) != 0:
             dict1 = storage.all()
             obj = dict1[key]
@@ -82,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
         """Deletes an instance based on the class name and id"""
 
         command = line.split()
-        key = valid_key(command)
+        key = self.valid_key(command)
         if len(key) != 0:
             dict1 = storage.all()
             obj = dict1[key]
@@ -160,7 +159,7 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id"""
 
         command = line.split()
-        key = valid_key(command)
+        key = self.valid_key(command)
         if len(key) == 0:
             return
         if len(command) == 2:
