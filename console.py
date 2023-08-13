@@ -134,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
         dict1 = storage.all().copy()
         for key in dict1.keys():
             if key.split('.')[0] == args:
-                count+=1
+                count += 1
         print(count)
 
     def do_update(self, line):
