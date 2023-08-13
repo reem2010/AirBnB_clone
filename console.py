@@ -97,11 +97,27 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             dict1 = storage.all()
-            print(dict1)
             for key in dict1.keys():
                 if len(line) == 0 or key.split('.')[0] == line:
                     out.append((dict1[key]).__str__())
             print(out)
+
+    def default(self, line):
+        """
+        """
+        classes = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
+        classes.append('Review')
+        args = line.split('.')
+        if len(args) == 2:
+            if args[0] not in classes:
+                print("** class doesn't exist **")
+            elif args[1] == "all()":
+                dict1 = storage.all()
+                out = []
+                for key in dict1.keys():
+                    if key.split('.')[0] == args[0]:
+                        out.append((dict1[key]).__str__())
+                print(f"[{', '.join(out)}]")
 
     def do_update(self, line):
         """Updates an instance based on the class name and id"""
