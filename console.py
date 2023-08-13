@@ -35,6 +35,7 @@ def valid_key(command):
 
 class HBNBCommand(cmd.Cmd):
     """Inheritance of cmd class"""
+
     prompt = '(hbnb) '
 
     def do_EOF(self, line):
