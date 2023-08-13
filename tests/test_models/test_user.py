@@ -10,6 +10,7 @@ class TestFile(unittest.TestCase):
     """class to test base model"""
 
     def test_attributes_type(self):
+        """test attributes type"""
         self.assertEqual(type(User().email), str)
         self.assertEqual(type(User().password), str)
         self.assertEqual(type(User().first_name), str)
@@ -19,4 +20,5 @@ class TestFile(unittest.TestCase):
         self.assertEqual(type(User().updated_at), datetime)
 
     def test_class_type(self):
+        """test class type"""
         self.assertEqual(type(User()), User)
