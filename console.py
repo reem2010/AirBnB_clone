@@ -46,6 +46,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        """Enter and I will do nothing!"""
         return
 
     def do_create(self, line):
@@ -64,10 +65,7 @@ class HBNBCommand(cmd.Cmd):
         print("** class doesn't exist **")
 
     def do_show(self, line):
-        """
-        Prints the string representation of
-        an instance based on the class name
-        """
+        """Prints the string representation of an instance"""
         command = line.split()
         key = valid_key(command)
         if len(key) != 0:
@@ -87,10 +85,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, line):
-        """
-        Prints all string representation of
-        all instances based or not on the class name
-        """
+        """representation of all instances based or not on the class name"""
         models = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
         models.append('Review')
         out = []
@@ -104,33 +99,38 @@ class HBNBCommand(cmd.Cmd):
             print(out)
 
     def default(self, line):
-        """
-        """
+        """for unique syntax"""
         classes = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
         classes.append('Review')
         args = line.split('.')
         if len(args) == 2:
-            if args[0] not in classes:
+            A0 = args[0]
+            A1 = args[1]
+            if A0 not in classes:
                 print("** class doesn't exist **")
-            elif args[1] == "all()":
-                self.class_all(args[0])
-            elif args[1] == "count()":
-                self.count(args[0])
-            elif re.match(r"show", args[1]):
-                pattern = str((re.search(r'"([^"]*)"', args[1])).group())
+            elif A1 == "all()":
+                self.class_all(A0)
+            elif A1 == "count()":
+                self.count(A0)
+            elif re.match(r"show", A1):
+                pattern = str((re.search(r'"([^"]*)"', A1)).group())
                 pattern = pattern.replace("\"", "")
-                self.do_show(f"{args[0]} {pattern}")
-            elif re.match(r"destroy", args[1]):
-                pattern = str((re.search(r'"([^"]*)"', args[1])).group())
+                self.do_show(f"{A0} {pattern}")
+            elif re.match(r"destroy", A1):
+                pattern = str((re.search(r'"([^"]*)"', A1)).group())
                 pattern = pattern.replace("\"", "")
-                self.do_destroy(f"{args[0]} {pattern}")
-
+                self.do_destroy(f"{A0} {pattern}")
+            elif re.match(r"update", A1):
+                pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ")
+                pattern[0] = pattern[0].replace("\"", "")
+                pattern[1] = pattern[1].replace("\"", "")
+                pattern = f"{A0} {pattern[0]} {pattern[1]} {pattern[2]}"
+                self.do_update(pattern)
         else:
             print('*** Unknown syntax:', line)
 
     def class_all(self, args):
-        """
-        """
+        """same as do_all"""
         dict1 = storage.all()
         out = []
         for key in dict1.keys():
