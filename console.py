@@ -49,7 +49,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """Create a new instance of BaseModel"""
-        classs = [BaseModel, User]
+        classs = [BaseModel, User, State, City, Amenity, Place]
+        classs.append(Review)
         if len(line) == 0:
             print("** class name missing **")
             return
@@ -89,7 +90,8 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of
         all instances based or not on the class name
         """
-        models = [BaseModel.__name__, User.__name__]
+        models = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
+        classs.append('Review')
         out = []
         if len(line) != 0 and line not in models:
             print("** class doesn't exist **")
