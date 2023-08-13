@@ -3,12 +3,18 @@
 import cmd
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage
 
 
 def valid_key(command):
     """return valid key to the dictionary"""
-    classs = [BaseModel.__name__, User.__name__]
+    classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
+    classs.append('Review')
     valid_key = ""
     if len(command) == 0:
         print("** class name missing **")
