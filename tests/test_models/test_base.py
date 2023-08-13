@@ -2,8 +2,12 @@
 """test module for BaseModel"""
 import unittest
 import datetime
+<<<<<<< HEAD
 import time
 from models import storage
+=======
+import uuid
+>>>>>>> master
 from models.base_model import BaseModel
 
 
@@ -13,6 +17,7 @@ class TestBase(unittest.TestCase):
     def test_Base(self):
         """test base id"""
         my_model = BaseModel()
+<<<<<<< HEAD
         self.assertTrue(isinstance(my_model, BaseModel))
         self.assertIn(my_model, storage.all().values())
         key = f"{my_model.__class__.__name__}.{my_model.id}"
@@ -37,9 +42,20 @@ class TestBase(unittest.TestCase):
     def test_id(self):
         """test id"""
         my_model = BaseModel()
+=======
+        self.assertEqual(type(my_model), BaseModel)
+>>>>>>> master
         self.assertEqual(type(my_model.id), str)
         my_model2 = BaseModel()
         self.assertNotEqual(my_model.id, my_model2.id)
+
+    def test_uuid(self):
+        my_model = BaseModel()
+        try:
+            uuid_4 = uuid.UUID(my_model.id).version
+        except ValueError:
+            uuid_4 = 0
+        self.assertTrue(uuid_4 == 4)
 
     def test_str(self):
         """test function string"""
@@ -47,11 +63,19 @@ class TestBase(unittest.TestCase):
         out = f"[BaseModel] ({my_model.id}) {my_model.__dict__}"
         self.assertEqual(my_model.__str__(), out)
 
+    def test_creation_date(self):
+        my_model_1 = BaseModel()
+        my_model_2 = BaseModel()
+        self.assertLess(my_model_1.created_at, my_model_2.created_at)
+        self.assertLess(my_model_1.updated_at, my_model_2.updated_at)
+
     def test_time(self):
         """test the time"""
         my_model = BaseModel()
+        model_up = my_model.updated_at
         my_model.save()
-        self.assertNotEqual(my_model.created_at, my_model.updated_at)
+        self.assertLess(model_up, my_model.updated_at)
+        self.assertLess(my_model.created_at, my_model.updated_at)
         self.assertEqual(type(my_model.created_at), datetime.datetime)
         self.assertEqual(type(my_model.updated_at), datetime.datetime)
         my_model_json = my_model.to_dict()
@@ -63,8 +87,13 @@ class TestBase(unittest.TestCase):
     def test_todic(self):
         """test to dic function"""
         my_model = BaseModel()
+        my_model.name = "MODEL"
+        my_model.num = 19
         my_model_json = my_model.to_dict()
-        self.assertTrue('__class__' in my_model_json)
+        self.assertIn('__class__', my_model_json)
+        for key in my_model.__dict__:
+            self.assertIn(key, my_model_json)
+        self.assertEqual(type(my_model_json), dict)
 
 
 if __name__ == '__main__':
