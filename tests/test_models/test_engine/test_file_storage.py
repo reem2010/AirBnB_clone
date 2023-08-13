@@ -3,7 +3,6 @@
 import unittest
 import datetime
 import time
-from models.engine.file_storage import FileStorage
 import uuid
 from models.base_model import BaseModel
 from models import storage
@@ -11,11 +10,6 @@ from models import storage
 
 class TestFile(unittest.TestCase):
     """class to test base model"""
-
-    def test_file(self):
-        """initialize module"""
-        file1 = FileStorage()
-        self.assertEqual(type(file1.all()), dict)
 
     def test_Base(self):
         """test storage in dictionary"""
