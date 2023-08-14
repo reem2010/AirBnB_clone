@@ -132,11 +132,11 @@ class HBNBCommand(cmd.Cmd):
                 pattern = pattern.replace("\"", "")
                 self.do_destroy(f"{A0} {pattern}")
             elif re.match(r"update", A1):
-                self.up_dic(A0, A1)
+                self.do_dic(A0, A1)
         else:
             print('*** Unknown syntax:', line)
 
-    def up_dic(self, A0, A1):
+    def do_dic(self, A0, A1):
         """Update from dictionary"""
         pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ", 1)
         if not(re.match(r"^{", pattern[1])):
