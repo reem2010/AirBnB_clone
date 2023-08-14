@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = f"{command[0]}.{command[1]}"
-            dict1 = storage.all().copy()
+            dict1 = storage.all()
             if key not in dict1:
                 print("** no instance found **")
             else:
@@ -164,6 +164,7 @@ class HBNBCommand(cmd.Cmd):
         classs = ['BaseModel', 'User', 'State', 'City', 'Amenity', 'Place']
         classs.append('Review')
         command = line.split()
+        key = ""
         if len(command) == 0:
             print("** class name missing **")
         elif command[0] not in classs:
@@ -171,12 +172,12 @@ class HBNBCommand(cmd.Cmd):
         elif len(command) == 1:
             print("** instance id missing **")
         else:
-            key = f"{command[0]}.{command[1]}"
-            dict1 = storage.all().copy()
-            if key not in dict1:
+            key1 = f"{command[0]}.{command[1]}"
+            dict_1 = storage.all().copy()
+            if key1 not in dict_1:
                 print("** no instance found **")
             else:
-                key = ""
+                key = key1
         if len(key) == 0:
             return
         if len(command) == 2:
