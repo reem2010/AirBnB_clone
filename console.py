@@ -138,8 +138,9 @@ class HBNBCommand(cmd.Cmd):
 
     def do_dic(self, A0, A1):
         """Update from dictionary"""
+
         pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ", 1)
-        if not(re.match(r"^{", pattern[1])):
+        if not (re.match(r"^{", pattern[1])):
             pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ")
             pattern[0] = pattern[0].replace("\"", "")
             pattern[1] = pattern[1].replace("\"", "")
