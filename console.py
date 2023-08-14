@@ -2,6 +2,7 @@
 """Importing CMD"""
 import cmd
 import re
+import json
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -131,11 +132,23 @@ class HBNBCommand(cmd.Cmd):
                 pattern = pattern.replace("\"", "")
                 self.do_destroy(f"{A0} {pattern}")
             elif re.match(r"update", A1):
-                pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ")
-                pattern[0] = pattern[0].replace("\"", "")
-                pattern[1] = pattern[1].replace("\"", "")
-                pattern = f"{A0} {pattern[0]} {pattern[1]} {pattern[2]}"
-                self.do_update(pattern)
+                pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ", 1)
+                if not(re.match(r"^{", pattern[1])):
+                    pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ")
+                    pattern[0] = pattern[0].replace("\"", "")
+                    pattern[1] = pattern[1].replace("\"", "")
+                    pattern = f"{A0} {pattern[0]} {pattern[1]} {pattern[2]}"
+                    self.do_update(pattern)
+                else:
+                    pattern[0] = pattern[0].replace("\"", "")
+                    pattern[1] = eval(pattern[1])
+                    for key, value in pattern[1].items():
+                        if type(value) == str:
+                            patt = f"{A0} {pattern[0]} {key} \"{value}\""
+                        else:
+                            patt = f"{A0} {pattern[0]} {key} {value}"
+                        self.do_update(patt)
+
         else:
             print('*** Unknown syntax:', line)
 
