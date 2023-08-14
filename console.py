@@ -137,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
             print('*** Unknown syntax:', line)
 
     def up_dic(self, A0, A1):
+        """Update from dictionary"""
         pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ", 1)
         if not(re.match(r"^{", pattern[1])):
             pattern = (A1[A1.find('(')+1:A1.find(')')]).split(", ")
