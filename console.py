@@ -148,7 +148,6 @@ class HBNBCommand(cmd.Cmd):
                         else:
                             patt = f"{A0} {pattern[0]} {key} {value}"
                         self.do_update(patt)
-
         else:
             print('*** Unknown syntax:', line)
 
