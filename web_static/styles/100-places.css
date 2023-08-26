@@ -76,7 +76,7 @@
 	text-align: center;
 }
 .place_holder{
-	height: 70px;
+	min-height: 70px;
 	width: 60px;
 }
 .user{
