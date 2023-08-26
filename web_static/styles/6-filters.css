@@ -55,8 +55,8 @@ ul{
 	background-color: #FAFAFA;
 	border: 1px solid #DDDDDD;
 	border-radius: 4px;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	z-index: 2;
 	position: relative;
 }
@@ -72,6 +72,9 @@ ul{
 .bold{
 	padding-left: 0;	
 }
+.popover > li{
+	padding-bottom: 6px;
+}	
 .bold > li{
 	padding-bottom: 20px;
 }
