@@ -6,4 +6,5 @@ body{
 	font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
 }
